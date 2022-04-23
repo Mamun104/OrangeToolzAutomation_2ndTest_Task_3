@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 public class AddNewContract {
 
@@ -18,7 +19,7 @@ public class AddNewContract {
 
         WebElement addContact = driver.findElement(By.xpath("//a[contains(text(),'Add Contact')]"));
         addContact.click();
-        WebElement tegList = driver.findElement(By.id("checkbox-4-0107"));
+        WebElement tegList = driver.findElement(By.id("checkbox-4-0108"));
         tegList.click();
         WebElement number = driver.findElement(By.name("number"));
         number.sendKeys("12345678956");
@@ -43,6 +44,36 @@ public class AddNewContract {
         WebElement submitBtn = driver.findElement(By.xpath("//button[contains(text(),'Add Contact')]"));
         submitBtn.click();
 
+    }
+
+    public void addContactWithEmptyData(){
+
+        WebElement addContact = driver.findElement(By.xpath("//a[contains(text(),'Add Contact')]"));
+        addContact.click();
+        WebElement tegList = driver.findElement(By.id("checkbox-4-0108"));
+        tegList.click();
+        WebElement submitBtn = driver.findElement(By.xpath("//button[contains(text(),'Add Contact')]"));
+        submitBtn.click();
+        String text = driver.findElement(By.xpath("//span[contains(text(),'The number field is required.')]")).getText();
+        Assert.assertTrue(text.contains("The number field is required."));
+
+    }
+
+    public void checkFiltering(){
+
+        WebElement filterBtn = driver.findElement(By.xpath("//body/div[2]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/button[1]"));
+        filterBtn.click();
+        WebElement checkContactByNumber = driver.findElement(By.id("searchbytext"));
+        filterBtn.sendKeys("322");
+
+    }
+
+    public void importContact(){
+
+        WebElement importBtn = driver.findElement(By.xpath("//span[contains(text(),'Import Contacts')]"));
+        importBtn.click();
+        String text = driver.findElement(By.xpath("//h6[contains(text(),'Please upload contact document.')]")).getText();
+        Assert.assertTrue(text.contains("Please upload contact document."));
 
     }
 

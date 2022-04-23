@@ -1,8 +1,9 @@
-import org.junit.After;
-import org.junit.Before;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 import java.time.Duration;
 
@@ -10,7 +11,7 @@ public class Setup {
 
     public WebDriver driver;
 
-    @Before
+    @BeforeTest
     public void setUp() {
 
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
@@ -21,7 +22,7 @@ public class Setup {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
 
     }
-    @After
+    @AfterTest
     public void closeBrowser(){
 
         driver.close();
